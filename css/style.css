@@ -1,0 +1,2442 @@
+
+/* ===== 기본 스타일 ===== */
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+}
+* {
+    font-family: inherit;
+}
+.container {
+    max-width: 1920px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #000;
+    padding-bottom: 0px;
+}
+
+h3 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    color: #000;
+}
+
+h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #000;
+}
+
+.description {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* ===== 텍스트 필드 스타일 ===== */
+.guide-section {
+    display: flex;
+    margin-bottom: 40px;
+    align-items: center;
+}
+
+.state-label {
+    width: 120px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.field-container {
+    flex: 1;
+    position: relative;
+    border: none;
+    padding: 8px;
+    background-color: transparent;
+    width: 350px;
+}
+
+/* 텍스트 필드 스타일 */
+.field-label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+    color: #A4A4A4;/* default일 때 */
+}
+
+.field-label.required::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background-color: #A42444; /* 와인색 */
+    border-radius: 50%;
+    margin-right: 6px;
+    vertical-align: middle;
+    transform: translateY(-3px); /* ✅ 도트 위로 올림 */
+}
+
+.field-container.disabled .field-label {
+    color: #ccc; /* disabled일 때 */
+}
+.text-field {
+    width: 100%;
+    height: 40px;
+    padding: 0 0;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background-color: transparent;
+    transition: all 0.3s ease;
+    outline: none;
+    margin-bottom: 4px;
+}
+
+/* 플레이스홀더 스타일 */
+.text-field::placeholder {
+    color: #DEDEDE;
+}
+
+/* 호버 상태 */
+.text-field.hover, .text-field.hover-active {
+    border-bottom: 1px solid #999;
+}
+
+/* 포커스 상태 */
+.text-field.focused {
+    border-bottom: 1px solid #000000;
+}
+
+/* 활성화 상태 (값이 있는 경우) */
+.text-field.activated, .text-field.activated-real {
+    border-bottom: 1px solid #DEDEDE;
+    color: #000;
+}
+
+/* 에러 상태 */
+.text-field.error {
+    border-bottom: 1px solid #e53935;
+}
+
+/* ===== 하이픈 연락처 입력 필드 스타일 ===== */
+/* 연락처 입력 필드 기본 스타일 */
+.text-field.phone-field {
+    letter-spacing: 0.5px; /* 글자 간격 조정 */
+    font-family: 'Pretendard', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* 연락처 입력 필드 플레이스홀더 */
+.text-field.phone-field::placeholder {
+    color: #DEDEDE;
+    opacity: 1;     /* 일부 브라우저에서 흐려지는 걸 방지 */
+    letter-spacing: normal;
+}
+
+/* 연락처 입력 필드 포커스 상태 */
+.text-field.phone-field:focus {
+    border-bottom: 1px solid #000000;
+}
+
+/* 연락처 입력 필드 활성화 상태 */
+.text-field.phone-field.activated,
+.text-field.phone-field.activated-real {
+    border-bottom: 1px solid #DEDEDE;
+    color: #000;
+}
+
+/* 연락처 입력 필드 비활성화 상태 */
+.text-field.phone-field.disabled {
+    border-bottom: 1px solid #A4A4A4;
+    color: #A4A4A4;
+    cursor: not-allowed;
+}
+
+/* 연락처 입력 필드 에러 상태 */
+.text-field.phone-field.error {
+    border-bottom: 1px solid #e53935;
+}
+
+
+.error-message {
+    color: #e53935;
+    font-size: 12px;
+    padding-left: 0;
+}
+
+/* 비활성화 상태 */
+.text-field.disabled {
+    border-bottom: 1px solid #A4A4A4;
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 실제 상호작용을 위한 스타일 */
+.text-field:focus {
+    border-bottom: 1px solid #000000;
+}
+
+.text-field:disabled {
+    background-color: transparent;
+    color: #A4A4A4;
+    cursor: not-allowed;
+}
+
+/* ===== 공통 날짜 입력 필드 스타일 ===== */
+.date-input {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #E0E0E0; /* 기본 회색 */
+    background-color: transparent;
+    color: #DEDEDE; /* 기본 글자색 - 비활성 */
+    height: 40px;
+    padding: 0 0 4px 0;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+/* 날짜 인풋 + 아이콘을 감싸는 래퍼 */
+.date-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* 달력 아이콘 */
+.calendar-icon {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
+    /*opacity: 0.5;*/
+}
+
+/* 날짜 인풋에 아이콘 공간 확보 */
+.date-input {
+    padding-right: 36px; /* 아이콘 공간 */
+}
+
+/* placeholder 비활성화 스타일 */
+.date-input::placeholder {
+    color: #DEDEDE;
+}
+
+/* hover 상태 */
+.date-input:hover {
+    border-bottom: 1px solid #999999;
+}
+
+/* focus 상태 */
+.date-input:focus {
+    border-bottom: 1px solid #000000;
+    color: #000000;
+}
+
+/* activated 상태: 값이 있을 때 (JS로 클래스 추가하거나 :not(:placeholder-shown) 활용) */
+.date-input.activated {
+    color: #000000;
+    border-bottom: 1px solid #DEDEDE;
+}
+
+/* error 상태 (선택) */
+.date-input.error {
+    border-bottom: 1px solid #e53935;
+    color: #e53935;
+}
+
+/* 드롭다운 전체 컨테이너 */
+.select-field-wrapper {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+/* 라벨 */
+.field-label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* 입력 필드 영역 */
+.select-field {
+    position: relative;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 입력 필드 스타일 */
+.select-input {
+    width: 100%;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: #000;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+.select-input::placeholder {
+    color: #ccc;
+}
+
+/* 선택된 경우 */
+.select-input.activated {
+    font-weight: 500;
+    color: #000;
+}
+
+/* 화살표 아이콘 */
+.select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/ic_down_24.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+/* 열림 상태 화살표 */
+.select-field.open .select-arrow {
+    background-image: url('../images/ic_up_24.png');
+}
+
+/* 드롭다운 메뉴 */
+.select-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #eee;
+    background-color: #fff;
+    z-index: 100;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* 열림 상태 */
+.select-field.open .select-options {
+    display: block;
+}
+
+/* 옵션 항목 */
+.select-option {
+    padding: 12px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* 마우스 호버 상태 */
+.select-option:hover {
+    background-color: #f8f8f8;
+}
+
+ /* 선택된 항목 */
+.select-option.selected {
+    background-color: #fbd9d9;
+}
+
+/* ===== 버튼 스타일 ===== */
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 15px; /* 버튼 간격 설정 */
+}
+
+.file-upload-container {
+    margin-top: 12px;
+}
+
+/* 라벨 */
+.file-upload-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* 설명 영역 (비활성화 상태 기본) */
+.file-upload-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 4px 4px 12px;
+    border: 1px dashed #ddd;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #ccc;
+    background-color: transparent;
+}
+
+.file-upload-box.disabled {
+    background-color: #f9f9f9;
+    cursor: not-allowed;
+}
+
+/* 등록 버튼 */
+.file-upload-box .upload-button {
+    border: 1px solid #ddd;
+    background-color: #fff;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #000;
+    transition: all 0.2s;
+}
+
+.file-upload-full-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* 아이콘과 텍스트 간 간격 */
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+    border: 1px dashed #ddd;
+    border-radius: 12px;
+    font-size: 14px;
+    color: #A4A4A4;
+    cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
+}
+
+.file-upload-full-button:hover {
+    background-color: #f9f9f9;
+}
+
+.file-upload-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+.file-upload-box .upload-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* ===== 업로드 후 파일 표시 영역 ===== */
+
+.uploaded-file-list {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.uploaded-file {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #f6f6f6;
+    border-radius: 12px;
+    padding: 8px 20px;
+    margin-top: 4px;
+    font-size: 14px;
+    min-width: 0; /* ✅ flex 내부에서 자식 줄바꿈 가능하게 */
+    width: 100%;          /* ✅ 고정 너비 부여 (팝업 내부 기준으로) */
+    max-width: 100%;
+    box-sizing: border-box; /* ✅ 패딩 포함 처리 */
+    overflow: hidden;
+}
+
+
+.uploaded-file .file-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url(../images/ic_file_24.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.uploaded-file .file-name {
+    display: block;         /* ✅ 텍스트 컨테이너로 처리 */
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.uploaded-file .remove-file {
+    width: 20px;
+    height: 20px;
+    background-image: url(../images/ic_delete_24.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    outline: none;
+    border: none;         /* ✅ 버튼일 경우 테두리 제거 */
+    background-color: transparent; /* ✅ 배경 제거 */
+}
+
+
+/* 버튼 기본 스타일 */
+.btn {
+    padding: 16px 20px;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    outline: none;
+    border: none;
+    min-width: 120px;
+    text-align: center;
+}
+
+/* Solid 스타일 버튼 */
+.btn-solid {
+    background-color: #A42444;
+    color: white;
+    border: 1px solid #b92e4b;
+}
+
+.btn-solid:hover:not(:disabled),
+.btn-solid.btn-hovered:not(:disabled) {
+    background-color: #811631;
+    border-color: #811631;
+}
+
+.btn-solid:active:not(:disabled),
+.btn-solid.btn-pressed:not(:disabled) {
+    background-color: #670F25;
+    border-color: #670F25;
+}
+
+.btn-solid:disabled {
+    background-color: #B7A1A6;
+    border-color: #B7A1A6;
+    cursor: not-allowed;
+}
+
+/* Line 스타일 버튼 */
+.btn-line {
+    background-color: transparent;
+    color: #A42444;
+    /*border: 1px solid #ffffff;*/
+}
+
+.btn-line:hover:not(:disabled),
+.btn-line.btn-hovered:not(:disabled) {
+    background-color: #FCEDF1;
+    color: #A42444;
+    border-color: #ffffff;
+}
+
+.btn-line:active:not(:disabled),
+.btn-line.btn-pressed:not(:disabled) {
+    background-color: #F4DDE4;
+    color: #A42444;
+    border-color: #fff;
+}
+
+.btn-line:disabled {
+    color: #B7A1A6;
+    border-color: #ffffff;
+    cursor: not-allowed;
+}
+
+
+
+/* 버튼 크기 */
+.btn-small {
+    padding: 7px 16px;
+    font-size: 14px;
+    min-width: 0px;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+.btn-large {
+    padding: 16px 20px;
+    font-size: 16px;
+    min-width: 0px;
+    box-sizing: border-box;
+
+}
+
+/* ===== 탭 스타일 ===== */
+/* 탭 컨테이너 스타일 */
+.tab-container {
+    position: relative;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+/* 탭 그룹 스타일 */
+.tab-group {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    width: 100%;
+}
+
+/* 탭 버튼 기본 스타일 */
+.tab-button {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #999; /* default 상태 색상 */
+    cursor: pointer;
+    transition: color 0.3s ease;
+    position: relative;
+    outline: none;
+    margin-right: 0px;
+}
+
+/* 팝업 내 탭 버튼 스타일 */
+.popup-container .tab-button {
+    flex: 1;
+    text-align: center;
+}
+
+/* 팝업 내 버튼 컨테이너 스타일 */
+.popup-container .button-container {
+    padding: 0;
+    margin-top: 10px; /* 30px에서 25px로 변경하여 위로 5px 이동 */
+}
+
+/* 활성화된 탭 버튼 스타일 */
+.tab-button.active {
+    color: #b92e4b; /* Active 상태 색상 */
+    font-weight: 500;
+}
+
+/* 탭 인디케이터 (하단 바) */
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background-color: #b92e4b;
+    transition: all 0.3s ease;
+    width: 0;
+}
+
+/* Active 탭 버튼 아래에 인디케이터 표시 */
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #b92e4b;
+}
+
+/* 호버 효과 */
+.tab-button:hover:not(.active) {
+    color: #666;
+}
+
+/* 탭 콘텐츠 스타일 */
+.tab-content {
+    margin-top: 20px;
+}
+
+.tab-pane {
+    display: none;
+    padding: 0px;
+    background-color: #ffffff;
+    border-radius: 5px;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* 다양한 크기의 탭 */
+/* 작은 크기 */
+.tab-container.small .tab-button {
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+/* 큰 크기 */
+.tab-container.large .tab-button {
+    padding: 16px 24px;
+    font-size: 20px;
+}
+
+/* ===== 사이드바 스타일 ===== */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    background-color: #A42444;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 상단/하단 분리 */
+    overflow: hidden;
+    z-index: 101;
+  }
+
+  .sidebar-menu {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    overflow-y: auto; /* 메뉴가 많을 경우 스크롤 가능 */
+  }
+
+  .sidebar-footer {
+    /*border-top: 1px solid #a52343;*/
+    padding: 0; /* ✅ padding 제거 */
+    /*background-color: #911E3B; */
+    flex-shrink: 0;
+  }
+
+  .sidebar-footer .menu-item {
+    padding: 24px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 24px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .menu-item.active {
+    background-color: #8D1E3A;
+  }
+
+  .menu-item:hover:not(.active) {
+    background-color: #B8284C;
+  }
+
+  .menu-icon {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: none;
+  }
+
+/* ===== 헤더 스타일 ===== */
+.header-container {
+    background-color: white;
+}
+
+.alarm-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.alarm-badge {
+    background-color: #b92e4b;
+    color: white;
+    font-size: 14px;
+    font-weight: regular;
+    border-radius: 12px; /* 원형에서 둘근한 사각형으로 변경 */
+    min-width: 22px; /* 최소 너비 설정 */
+    height: 22px; /* 고정 높이 */
+    padding: 0 6px; /* 좌우 패딩 추가 */
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 설정 */
+    text-align: center; /* 텍스트 가운데 정렬 */
+    line-height: 22px; /* 수직 가운데 정렬을 위한 설정 */
+    transform: translateX(0); /* 기본 위치 */
+    transition: transform 0.3s ease, min-width 0.3s ease; /* 애니메이션 효과 */
+}
+
+.user-name {
+    display: none; /* 텍스트 대신 아이콘으로 변경하므로 숨김 처리 */
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.user-icon {
+    width: 48px;
+    height: 48px;
+}
+
+.logout-btn {
+    background: none; /* 배경색 제거 */
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logout-icon {
+    width: 48px; /* 아이콘 크기 변경 */
+    height: 48px;
+    object-fit: contain;
+}
+
+/* ===== 카드 스타일 ===== */
+.card {
+    background-color: white;
+    border-radius: 24px;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: left;
+}
+
+.card:active, .card.clicked {
+    background-color: #f0f0f0;
+}
+
+.card-icon-img {
+    object-fit: contain;
+}
+
+.card-title {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.card-count {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* ===== 테이블 스타일 ===== */
+.table-content {
+    background-color: white;
+    border-radius: 0px;
+}
+
+.table-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.view-more {
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    border-bottom: 1px solid #dedede;
+    padding: 12px 10px; /* 상하 12px, 좌우 10px 패딩 */
+    text-align: left;
+}
+
+/* 금액 우측 정렬 */
+.td-right {
+    text-align: right;
+}
+
+/* 클릭 가능한 td 스타일 */
+td {
+    cursor: pointer; /* 클릭 가능한 커서 표시 */
+    position: relative; /* 가상 요소 위치 기준 */
+}
+
+/* 클릭 가능한 표시 (화살표) - 제거됨 */
+td::after {
+    content: none;
+    display: none;
+}
+
+/* 테이블 내 chip 컨테이너 td는 클릭 표시 제거 - 클래스 추가 필요 */
+td.chip-cell {
+    cursor: default; /* 기본 커서로 변경 */
+}
+
+td.chip-cell::after {
+    display: none; /* 화살표 숨김 */
+}
+
+/* 테이블 내 chip 스타일 */
+td .chip {
+    cursor: default; /* 클릭 기능 제거 */
+    pointer-events: none; /* 클릭 이벤트 무시 */
+}
+
+th {
+    border-bottom: 1px solid #bebebe;
+    font-weight: normal;
+    color: #666;
+    font-size: 14px;
+}
+
+td {
+    font-size: 16px;
+}
+
+.table-row:hover {
+    background-color: #f0f0f0;
+}
+
+thead tr {
+    background-color: #EDEDED; /* 원하는 색상 */
+}
+
+
+.table-input {
+    height: 36px;
+    border: 1px solid #DEDEDE;
+    border-radius: 4px;
+    padding: 0 10px;
+    padding-right: 40px; /* ✅ 체크 아이콘과 겹치지 않도록 여백 확보 */
+    font-size: 14px;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ✅ 입력 중일 때 스타일 */
+.table-input:focus {
+    border: 1px solid #333; /* 원하는 색상 & 두께 */
+    outline: none; /* 기본 브라우저 파란 테두리 제거 */
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon .check-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.sortable-header {
+    position: relative;
+    text-align: right;
+}
+
+.sort-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-left: 6px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.sort-button img {
+    width: 18px;
+    height: 18px;
+}
+
+/* ===== 콘텐츠 헤더 스타일 ===== */
+/* 콘텐츠 헤더 기본 스타일 */
+.content-header {
+    display: flex;
+    position: relative;   /* ✅ 드롭다운 위치 기준 */
+    overflow: visible;    /* ✅ 드롭다운이 넘쳐 보여야 함 */
+    align-items: center;
+    justify-content: space-between; /* 좌우 정렬로 변경 */
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 0 !important;
+    font-size: 16px;
+    flex: 1 1 auto;       /* 각 요소가 줄바꿈 가능하게 */
+    min-width: 120px;     /* 최소 보장 */
+}
+
+.filter-group-left,
+.filter-group-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* 입력 필드 스타일 */
+.header-input {
+    flex: 0 1 400px;
+    min-width: 100px;
+    max-width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ffffff;
+    border-radius: 4px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-left: 10px;  /* 좌측 마진 축소 */
+}
+
+.header-input:focus {
+    border-color: #fff;
+}
+
+.header-input::placeholder {
+    color: #aaa;
+}
+
+/* 드롭다운 스타일 */
+.header-dropdown {
+    position: relative;
+    overflow: visible !important; /* ✅ 부모가 숨기지 않도록 설정 */
+    margin: 0 5px;
+    /*min-width: 120px;*/
+}
+
+.dropdown-wrap {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.dropdown-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* ✅ 다시 이걸로 바꿔야 아이콘이 오른쪽으로 고정됨 */
+    padding: 10px 50px 10px 8px;
+    border: 1px solid #ffffff;
+    background-color: #ffffff;
+    font-size: 16px;
+    border-radius: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    gap: 8px; /* ✅ 텍스트와 화살표 간격 추가 */
+    cursor: pointer;
+    flex: 0 0 auto;   /* ✅ 추가: 공간을 유동적으로 차지하도록 */
+    min-width: 0;     /* ✅ 줄어들 수 있게 허용 */
+}
+
+/* 검색 버튼 스타일 */
+.search-button {
+    padding: 0px 32px !important;
+    /* margin-left: auto;                ✅ 우측 끝으로 밀어내는 핵심 */
+    align-self: stretch;
+    border-radius: 0 16px 16px 0;
+    background-color: #A42444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+}
+
+.search-button:hover {
+    background-color: #8D1E3A;
+}
+
+.search-button:active {
+    background-color: #670F25;
+}
+
+/*프로젝트명 전용*/
+.dropdown-button.wide-dropdown {
+    width: 300px;
+}
+
+.dropdown-button:hover {
+    border-color: #ccc;
+}
+
+.dropdown-button:after {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/ic_down_24.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: all 0.3s;
+    flex-shrink: 0;
+    position: absolute;       /* ✅ 절대 위치로 고정 */
+    right: 12px;              /* ✅ 오른쪽 고정 간격 */
+}
+
+.dropdown-button.active {
+    border-color: #A42444
+}
+
+.dropdown-button.active:after {
+    background-image: url('../images/ic_up_24.png');
+}
+
+.dropdown-button .selected-value {
+    flex-grow: 1;
+    text-align: left;         /* ✅ 왼쪽 정렬 */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dropdown-button.wide-dropdown .selected-value {
+    max-width: 100%;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1050;
+    width: 150%;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: none;
+    margin-top: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+.dropdown-item {
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* 날짜 선택 스타일 */
+.date-picker {
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 24px 0 5px;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative; /* 기준 요소 지정 */
+}
+
+/* ===== 추가: date-picker 좌측 요소 숨기기 ===== */
+.date-picker > *:first-child {
+    display: none;
+}
+
+.date-picker:hover {
+    border-color: #ccc;
+}
+
+.date-picker:after {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/ic_calender_24.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+.date-picker.active {
+    border-color: #A42444;
+}
+
+/* 날짜 선택 팝업 스타일 */
+.date-picker-popup {
+    position: absolute;
+    top: 100%;
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    margin-top: 5px;
+    padding: 15px;
+}
+
+.date-picker-popup.show {
+    display: block;
+}
+
+/* 작은 화면에서 팝업 크기 줄이기 */
+@media (max-width: 768px) {
+    .date-picker-popup {
+        width: 80%;     /* 작은 화면에서 팝업 너비를 80%로 설정 */
+        max-width: 400px; /* 팝업의 최대 너비를 400px로 설정 */
+        padding: 10px;   /* 패딩을 줄여서 공간 절약 */
+    }
+}
+
+@media (max-width: 480px) {
+    .date-picker-popup {
+        width: 90%;     /* 더 작은 화면에서 팝업 너비를 90%로 설정 */
+        max-width: 350px; /* 팝업의 최대 너비를 350px로 설정 */
+        padding: 8px;    /* 더 작은 화면에서 패딩을 더 줄임 */
+    }
+}
+
+
+
+/* 달력 헤더 스타일 */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-nav {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+}
+
+.calendar-title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* 달력 그리드 스타일 */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day {
+    text-align: center;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.calendar-date {
+    text-align: center;
+    padding: 8px 0;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.calendar-date:hover {
+    background-color: #f5f5f5;
+}
+
+.calendar-date.today {
+    background-color: #FFDDE0;
+    color: #A42444;
+}
+
+.calendar-date.selected {
+    background-color: #A42444;
+    color: white;
+}
+
+.calendar-date.disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 달력 푸터 스타일 */
+.calendar-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.calendar-btn {
+    padding: 8px 12px;
+    background-color: #A42444;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.calendar-btn.cancel {
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+/* ===== 팝업 스타일 ===== */
+/* 팝업 배경 딤 */
+.popup-dim {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 검은색 배경에 40% 투명도 */
+    z-index: 100;
+}
+
+/* 팝업 컨테이너 */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    min-width: 500px;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 36px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 101;
+    overflow: hidden;
+}
+
+
+/* 2칸 인풋 레이아웃 공통 */
+.input-row {
+    display: flex;
+    gap: 24px; /* 인풋 간 간격 */
+    margin-bottom: 24px;  /*아래 여백 */
+}
+
+/* 2칸 중 개별 인풋 wrapper */
+.input-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;  /* ✅ 자식 줄이기 허용 */
+}
+
+.input-col.narrow {
+    flex: 0 0 auto ;    /* 고정 폭으로 변경 */
+    width: 165px;      /* 강제 적용 */
+}
+
+
+/* 라벨 기본 스타일 */
+.field-label {
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 4px;
+    font-weight: 400;
+}
+
+/* 인풋 기본 스타일 */
+.text-field {
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background-color: transparent;
+    outline: none;
+}
+
+/* 팝업 헤더 */
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px 20px 40px;
+    border-bottom: none; /* 하단 라인 삭제 */
+    box-sizing: border-box;
+}
+
+/* 알럿 팝업 */
+#confirmDeletePopup {
+    display: none; /* ✅ 팝업 기본 상태는 숨김 */
+    max-width: 300px; /* 너비 제한 */
+    width: 80%;       /* 반응형 대응 */
+    margin: 0 auto;   /* 중앙 정렬 */
+}
+
+#confirmDeletePopup .popup-header {
+    justify-content: center; /* 타이틀 가운데 정렬 */
+}
+
+#confirmDeletePopup .popup-header h2 {
+    text-align: center;
+    margin: 0 auto;
+}
+
+#confirmDeletePopup .popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#confirmDeletePopup .button-row {
+    display: flex;
+    flex-direction: row;       /* ✅ 수평 배치 */
+    justify-content: center;   /* ✅ 가운데 정렬 */
+    gap: 12px;                 /* 버튼 간 간격 */
+    margin-top: 4px;
+}
+
+#confirmDeletePopup.popup-container {
+    min-width: auto !important; /* 공통 min-width 무시 */
+    width: 90%;
+    max-width: 360px;
+    margin: 0 auto;
+}
+
+.popup-header h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    line-height: 30px; /* 높이를 close 버튼과 맞춤 */
+    margin: 0; /* 기본 마진 제거 */
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    width: 40px;
+    /*height: 40px;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn img {
+    width: 40px;
+    height: 40px;
+}
+
+/* 팝업 콘텐츠 */
+.popup-content {
+    padding: 0 0 40px 0;
+    box-sizing: border-box;
+}
+
+/* 팝업 내 탭 컨테이너 스타일 */
+.popup-container .tab-container {
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.popup-container .tab-group {
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 0px;
+}
+
+/* 팝업 내 폼 컨테이너 스타일 */
+.popup-container .form-container {
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+/* 팝업 내 텍스트 필드 스타일 */
+.popup-container .text-field {
+    width: 100%;
+    margin-right: 0;
+    box-sizing: border-box;
+}
+
+.popup-container .text-field.disabled {
+    border-bottom: 1px solid #A4A4A4;
+    color: #A4A4A4;
+    cursor: not-allowed;
+    background-color: transparent;
+}
+
+/* 팝업 내 탭 페인 스타일 */
+.popup-container .tab-pane {
+    display: none;
+}
+
+.popup-container .tab-pane.active {
+    display: block;
+}
+
+/* 팝업 내 필드 컨테이너 스타일 */
+.popup-container .field-container {
+    width: 100%;
+    box-sizing: border-box;
+    padding-right: 0;
+}
+
+/* 팝업 내 인풋 그룹 스타일 */
+.popup-container .input-group {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+/* 팝업 내 테이블 스타일 */
+.popup-container .table-section {
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+}
+
+.popup-container .table-content {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.popup-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.popup-container th {
+    padding: 10px;
+    font-size: 13px;
+}
+
+.popup-container td {
+    padding: 10px;
+    font-size: 13px;
+    cursor: pointer; /* 클릭 가능한 커서 표시 */
+    position: relative; /* 가상 요소 위치 기준 */
+}
+
+/* 팝업 내 테이블 셀 화살표 표시 - 제거됨 */
+.popup-container td::after {
+    content: none;
+    display: none;
+}
+
+/* 팝업 내 chip 컨테이너 td는 클릭 표시 제거 */
+.popup-container td.chip-cell {
+    cursor: default; /* 기본 커서로 변경 */
+}
+
+.popup-container td.chip-cell::after {
+    display: none; /* 화살표 숨김 */
+}
+
+/* 팝업 내 테이블의 chip 스타일 조정 */
+.popup-container .chip {
+    height: 32px;
+    padding: 0 12px;
+    font-size: 13px;
+    margin: 0;
+}
+
+.toast {
+    position: fixed;
+    bottom: 40px;                    /* 하단 여백 */
+    left: 50%;                      /* 중앙 정렬 */
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8); /* ✅ 투명도 70% */
+    color: white;                   /* 텍스트 색 */
+    padding: 16px 32px;             /* 패딩 */
+    border-radius: 0px;
+    font-size: 16px;
+    text-align: center;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+
+    /* 반응형 줄바꿈 처리 */
+    max-width: 90vw;
+    word-break: break-word;
+    white-space: normal;
+}
+
+.toast.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@media (max-width: 480px) {
+    .toast {
+        font-size: 14px;
+        padding: 12px 20px;
+    }
+}
+
+
+/* ===== 로그인 스타일 ===== */
+body.login-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 36px;
+    padding: 50px 40px; /* 위아래 50px, 좌우 40px */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-box {
+    width: 500px;
+    background-color: white;
+    border-radius: 36px;
+    padding: 50px 40px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo-img {
+    max-width: 200px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.input-container {
+    position: relative;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.login-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.login-input:focus {
+    border-color: #b92e4b;
+    outline: none;
+}
+
+.login-button {
+    background-color: #b92e4b;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+}
+
+.login-button:hover {
+    background-color: #9A2240;
+}
+
+.login-button:disabled {
+    background-color: #B7A1A6;
+    cursor: not-allowed;
+}
+
+
+
+/* ===== 반응형 스타일 ===== */
+@media (max-width: 768px) {
+    /* 버튼 반응형 스타일 */
+    .button-row {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .button-container {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    /* 탭 반응형 스타일 */
+    .tab-button {
+        padding: 10px 15px;
+        font-size: 16px;
+    }
+
+    .tab-container.large .tab-button {
+        padding: 12px 20px;
+        font-size: 18px;
+    }
+
+    /* 팝업 반응형 스타일 */
+    .popup-container {
+        max-width: 90%;
+        min-width: auto;
+    }
+}
+
+/* 화면이 1024px 이하일 때 사이드바 너비 줄이기 */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* 헤더 반응형 스타일 */
+    .header-item {
+        margin: 5px 0;
+    }
+
+    .login-btn {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    /* 팝업 반응형 스타일 */
+    .popup-container {
+        max-width: 95%;
+        min-width: auto;
+        border-radius: 20px;
+    }
+
+    .popup-header {
+        padding: 15px 20px;
+    }
+
+    .popup-content {
+        padding: 0 0 15px 0;
+    }
+
+    .popup-container .form-container,
+    .popup-container .tab-container,
+    .popup-container .table-section {
+        padding: 0 20px;
+    }
+
+    /* 로그인 반응형 스타일 */
+    .login-box {
+        width: 90%;
+        padding: 30px 20px;
+    }
+
+
+}
+
+/* ===== Chip 스타일 ===== */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 4px;
+    box-sizing: border-box;
+}
+
+/* 주황 Chip */
+.chip-orange {
+    background-color: #E89725;
+}
+
+/* 그레이 Chip */
+.chip-grey {
+    background-color: #999999;
+}
+
+/* 하늘 Chip */
+.chip-sky {
+    background-color: #52AAC7;
+}
+
+/* 그린 Chip */
+.chip-green {
+    background-color: #74B75F;
+}
+
+/* 보라 Chip */
+.chip-purple {
+    background-color: #8752C7;
+}
+
+/* 와인 Chip */
+.chip-wine {
+    background-color: #C752AC;
+}
+
+/* 호버 효과 */
+.chip:hover {
+    opacity: 0.9;
+}
+
+/* 비활성화 상태 */
+.chip.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 선택된 상태 */
+.chip.selected {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== 태그 칩 스타일 ===== */
+.tag-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    margin: 4px;
+    box-sizing: border-box;
+    min-width: 10px;
+    white-space: nowrap;  /* ✅ 줄바꿈 방지 */
+    overflow: hidden;     /* ✅ 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* ✅ 말줄임표 처리 (선택) */
+}
+
+/* 주황색 태그 */
+.tag-orange {
+    background-color: #E89725;
+}
+
+/* 초록색 태그 */
+.tag-green {
+    background-color: #74B75F;
+}
+
+/* 빨간색 태그 */
+.tag-red {
+    background-color: #D64545;
+}
+
+/* 회색 태그 */
+.tag-gray {
+    background-color: #999999;
+}
+
+/* 보라색 태그 */
+.tag-purple {
+    background-color: #8752C7;
+}
+
+/* 파란색 태그 */
+.tag-blue {
+    background-color: #4A6FD8;
+}
+
+/* 하늘색 태그 */
+.tag-skyblue {
+    background-color: #52AAC7;
+}
+
+/* 호버 효과 */
+.tag-chip:hover {
+    opacity: 0.9;
+}
+
+/* 비활성화 상태 */
+.tag-chip.disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* 선택된 상태 */
+.tag-chip.selected {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 반응형 스타일 */
+@media (max-width: 480px) {
+    .chip {
+        height: 32px;
+        padding: 0 12px;
+        font-size: 13px;
+    }
+}
+
+/* ===== 체크박스 스타일 ===== */
+.custom-checkbox {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* 체크박스 기본 상태 (enabled) */
+.custom-checkbox input:not(:disabled) ~ .checkmark {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+/* 체크박스 호버 상태 (enabled hover) */
+.custom-checkbox input:not(:disabled):not(:checked):hover ~ .checkmark,
+.custom-checkbox:hover input:not(:disabled):not(:checked) ~ .checkmark {
+    border-color: #A42444;
+}
+
+/* 체크박스 선택 상태 (selected) */
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: #A42444;
+    border-color: #A42444;
+}
+
+/* 체크박스 선택 호버 상태 (selected hover) */
+.custom-checkbox input:checked:hover ~ .checkmark,
+.custom-checkbox:hover input:checked ~ .checkmark {
+    background-color: #811631;
+    border-color: #811631;
+}
+
+/* 체크박스 비활성화 상태 (disabled) */
+.custom-checkbox input:disabled ~ .checkmark {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* 체크박스 선택 비활성화 상태 (selected disabled) */
+.custom-checkbox input:disabled:checked ~ .checkmark {
+    background-color: #B7A1A6;
+    border-color: #B7A1A6;
+}
+
+/* 체크 표시 */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* ===== 라디오버튼 스타일 ===== */
+.custom-radio {
+    position: relative;
+    display: flex; /* 중앙 정렬을 위해 flex 적용 */
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.custom-radio input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.radiomark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+/* 라디오버튼 기본 상태 (enabled) */
+.custom-radio input:not(:disabled) ~ .radiomark {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+/* 라디오버튼 호버 상태 (enabled hover) */
+.custom-radio input:not(:disabled):not(:checked):hover ~ .radiomark,
+.custom-radio:hover input:not(:disabled):not(:checked) ~ .radiomark {
+    border-color: #A42444;
+}
+
+/* 라디오버튼 선택 상태 (selected) */
+.custom-radio input:checked ~ .radiomark {
+    border-color: #A42444;
+}
+
+/* 라디오버튼 선택 호버 상태 (selected hover) */
+.custom-radio input:checked:hover ~ .radiomark,
+.custom-radio:hover input:checked ~ .radiomark {
+    border-color: #811631;
+}
+
+/* 라디오버튼 비활성화 상태 (disabled) */
+.custom-radio input:disabled ~ .radiomark {
+    background-color: #f5f5f5;
+    border-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* 라디오버튼 선택 비활성화 상태 (selected disabled) */
+.custom-radio input:disabled:checked ~ .radiomark {
+    border-color: #B7A1A6;
+}
+
+/* 라디오 내부 원 */
+.radiomark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #A42444;
+    transform: translate(-50%, -50%);
+}
+
+
+.custom-radio input:checked ~ .radiomark:after {
+    display: block;
+}
+
+/* 라디오버튼 선택 호버 상태의 내부 원 */
+.custom-radio input:checked:hover ~ .radiomark:after,
+.custom-radio:hover input:checked ~ .radiomark:after {
+    background: #811631;
+}
+
+/* 라디오버튼 선택 비활성화 상태의 내부 원 */
+.custom-radio input:disabled:checked ~ .radiomark:after {
+    background: #B7A1A6;
+}
+
+/* ===== 드롭다운 스타일 ===== */
+.dropdown-container {
+    position: relative;
+    width: 100%;
+   /* max-width: 300px; */
+    font-family: 'Pretendard', sans-serif;
+    margin-bottom: 12px;
+}
+
+/* 드롭다운 기본 스타일 (default) */
+.dropdown-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px 0;
+    background-color: transparent;
+    border: none; /* ✅ 전체 border 제거 */
+    border-bottom: 1px solid #ddd; /* ✅ 밑줄만 */
+    border-radius: 0;
+    cursor: pointer;
+    user-select: none;
+    font-size: 16px;
+    color: #DEDEDE;
+    transition: all 0.2s ease;
+}
+
+/* 드롭다운 화살표 아이콘 */
+.dropdown-select .dropdown-icon {
+    width: 24px;
+    height: 24px;
+    background-image: url('../images/ic_down_24.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+
+/* 드롭다운 선택된 상태 (selected) */
+.dropdown-select.selected {
+    /*border: 1px solid #A42444;*/
+    color: #333;
+}
+
+/* 선택된 경우 텍스트 색상 변경 */
+.dropdown-select.selected {
+    color: #000000;  /* 선택되었을 때 진한 텍스트 색 */
+    font-weight: 500; /* 선택 시 살짝 강조 */
+}
+
+.dropdown-select.selected .selected-value {
+    color: #000 !important;
+    font-weight: 400;
+}
+
+/* 드롭다운 선택된 상태의 화살표 아이콘 (위로 방향) */
+.dropdown-select.selected .dropdown-icon {
+    background-image: url('../images/ic_up_24.png');
+}
+
+/* 드롭다운 옵션 컨테이너 */
+.dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #D9D9D9;
+    border-radius: 0px 0px 16px 16px;
+    margin-top: -1px;
+    z-index: 1000;
+    display: none;
+}
+
+/* 드롭다운 옵션 표시 */
+.dropdown-select.selected + .dropdown-options {
+    display: block;
+}
+
+/* 드롭다운 옵션 아이템 */
+.dropdown-option {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: left;
+}
+
+/* 드롭다운 옵션 호버 상태 */
+.dropdown-option:hover {
+    background-color: #F5f5f5;
+}
+
+/* 드롭다운 선택된 옵션 */
+.dropdown-option.selected {
+    background-color: #FFDDE0;
+}
+
+/* ===== 페이지네이션 스타일 ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0px;
+    padding: 15px 0;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+.pagination-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.pagination-item:hover:not(.active) {
+    background-color: #e0e0e0;
+}
+
+.pagination-item.active {
+    background-color: #A42444;
+    color: white;
+    font-weight: 500;
+}
+
+.pagination-arrow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.pagination-arrow:hover {
+    background-color: #e0e0e0;
+    border-radius: 50%;
+}
+
+.pagination-ellipsis {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+}
+
+/* ===== 테이블 셀렉트 버튼 스타일 ===== */
+.table-select-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border: 1px solid #E0E0E0;
+    border-radius: 16px;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    color: #000000;
+    transition: all 0.2s ease;
+    height: 40px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.table-select-button::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url('../images/ic_down_24.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-left: 2px;
+}
+
+.table-select-button.open::after {
+    background-image: url('../images/ic_up_24.png');
+}
+
+/* 드롭다운 메뉴 */
+.table-select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+.table-select-button.open .table-select-dropdown {
+    display: block;
+}
+
+/* 드롭다운 옵션 */
+.table-select-option {
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+/* 선택된 옵션 */
+.table-select-option.selected {
+    background-color: #FFDDE0;
+}
+
+/* 호버 상태 */
+.table-select-option:hover:not(.selected) {
+    background-color: #F3F3F3;
+}
+
+/* ===== 아이콘 + 텍스트 조합형 버튼 스타일 ===== */
+.icon-text-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px; /* 아이콘과 텍스트 사이 간격 */
+    padding: 8px 12px;
+    border: 1px solid #DEDEDE;
+    border-radius: 30px; /* pill 형태 */
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    color: #000000;
+    transition: all 0.2s ease;
+    height: 36px;
+    box-sizing: border-box;
+    white-space: nowrap;  /* ✅ 줄바꿈 방지 */
+    overflow: hidden;     /* ✅ 넘치는 텍스트 숨김 */
+    text-overflow: ellipsis; /* ✅ 말줄임표 처리 (선택) */
+}
+
+.icon-text-button:hover {
+    background-color: #f5f5f5;
+}
+
+.icon-text-button:active {
+    background-color: #e0e0e0;
+}
+
+/* 비활성화 상태 */
+.icon-text-button:disabled,
+.icon-text-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: #ccc;
+    color: #999;
+    background-color: #f5f5f5;
+}
+
+.icon-text-button:disabled img,
+.icon-text-button.disabled img {
+    opacity: 0.5;
+}
+
+.icon-text-button img {
+    width: 20px;
+    height: 20px;
+}
+
+/* 텍스트 색상 변경 */
+.download-text {
+    color: #333; /* 원하는 색상 코드로 변경 */
+    text-decoration: none; /* 언더바 제거 */
+}
+
+/* 다운로드 링크 클릭 스타일 */
+.download-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none; /* 링크 기본 스타일 제거 */
+}

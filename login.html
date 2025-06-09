@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공사입찰 통합 시스템 - 로그인</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./js/login.js" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+        }
+
+        /* body 스타일은 style.css에서 관리 */
+
+        /* login-container 스타일은 style.css에서 관리 */
+
+        .logo-area {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .logo-img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .login-title {
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            width: 350px;
+        }
+
+        /* 에러 메시지 스타일 - text_field_guide.css에서 가져온 스타일을 확장 */
+        .error-message {
+            display: none;
+        }
+
+        .text-field.error ~ .error-message {
+            display: block;
+        }
+
+        .btn {
+            width: 350px;
+            margin-top: 20px;
+        }
+
+        .forgot-password {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .forgot-password a {
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* 반응형 스타일 */
+        @media (max-width: 768px) {
+            .login-container {
+                max-width: 90%;
+                padding: 40px 30px; /* 위아래 40px, 좌우 30px */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                max-width: 95%;
+                padding: 30px 20px; /* 위아래 30px, 좌우 20px */
+            }
+
+            .login-title {
+                font-size: 20px;
+            }
+
+            .input-field {
+                padding: 12px 0 12px 12px; /* 좌측 패딩 유지 */
+            }
+
+            .login-btn {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body class="login-page">
+    <img src="images/login_bg.png" alt="배경 이미지" style="position: absolute; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
+    <div class="login-container">
+        <div class="logo-area">
+            <img src="images/login_logo.png" alt="스프리마 로고" class="logo-img">
+        </div>
+
+        <h1 class="login-title">공사입찰 통합 시스템</h1>
+
+        <div class="form-container">
+            <form id="loginForm">
+                <div class="input-group field-container">
+                    <label for="username" class="field-label">아이디</label>
+                    <input type="text" id="username" class="text-field" placeholder="아이디를 입력하세요" required>
+                    <div class="error-message">아이디 또는 비밀번호를 확인해주세요.</div>
+                </div>
+
+                <div class="input-group field-container">
+                    <label for="password" class="field-label">비밀번호</label>
+                    <input type="password" id="password" class="text-field" placeholder="비밀번호를 입력하세요" required>
+                    <div class="error-message">아이디 또는 비밀번호를 확인해주세요.</div>
+                </div>
+
+                <button type="submit" class="btn btn-solid disabled" id="loginButton" disabled>로그인</button>
+            </form>
+
+            <div class="forgot-password">
+                <a href="#">아이디 비밀번호 찾기</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 입력 필드 상태 관리
+        const inputFields = document.querySelectorAll('.text-field');
+        const loginButton = document.getElementById('loginButton');
+        const usernameField = document.getElementById('username');
+        const passwordField = document.getElementById('password');
+
+        // 로그인 버튼 활성화 상태 갱신 함수
+        function updateLoginButtonState() {
+            if (usernameField.value.trim() !== '' && passwordField.value.trim() !== '') {
+                loginButton.classList.remove('disabled');
+                loginButton.disabled = false;
+            } else {
+                loginButton.classList.add('disabled');
+                loginButton.disabled = true;
+            }
+        }
+
+        // 초기 상태 설정
+        updateLoginButtonState();
+
+        inputFields.forEach(field => {
+            // 포커스 이벤트
+            field.addEventListener('focus', () => {
+                // 이미 에러 상태인 경우 에러 표시 제거
+                field.classList.remove('error');
+            });
+
+            // 값 변경 이벤트
+            field.addEventListener('input', () => {
+                if (field.value.trim() !== '') {
+                    field.classList.add('activated-real');
+                } else {
+                    field.classList.remove('activated-real');
+                }
+
+                // 로그인 버튼 상태 갱신
+                updateLoginButtonState();
+            });
+
+            // 포커스 아웃 이벤트
+            field.addEventListener('blur', () => {
+                if (field.value.trim() === '' && field.required) {
+                    field.classList.add('error');
+                } else {
+                    field.classList.remove('error');
+                }
+
+                // 로그인 버튼 상태 갱신
+                updateLoginButtonState();
+            });
+        });
+
+        // 폼 제출 이벤트
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let hasError = false;
+
+            // 입력 필드 유효성 검사
+            inputFields.forEach(field => {
+                if (field.value.trim() === '' && field.required) {
+                    field.classList.add('error');
+                    hasError = true;
+                }
+            });
+
+            if (!hasError) {
+                // 로그인 자격 증명 검증
+                const username = usernameField.value.trim();
+                const password = passwordField.value.trim();
+
+                if (username === 'suprema' && password === 'suprema123') {
+                    // 로그인 성공 - sub_01.html로 이동
+                    console.log('Login successful');
+                    window.location.href = 'sub_01.html';
+                } else {
+                    // 로그인 실패 - 에러 메시지 표시
+                    console.log('Login failed');
+                    usernameField.classList.add('error');
+                    passwordField.classList.add('error');
+
+                    // 에러 메시지를 더 명확하게 표시하기 위해 포커스를 아이디 필드로 이동
+                    usernameField.focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
