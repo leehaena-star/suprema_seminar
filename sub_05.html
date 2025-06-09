@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="ko" style="margin: 0; padding: 0;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>입찰 공고 관리 - 슈프리마 공사입찰시스템</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+    <!-- 모바일 메뉴 토글 버튼 -->
+    <button class="menu-toggle">
+        <img src="images/ic_menu_mo_48.png" alt="메뉴 아이콘" class="menu-toggle-icon">
+    </button>
+
+    <!-- 모바일용 햄버거 아이콘은 JavaScript에서 동적으로 생성됩니다 -->
+
+    <!-- 사이드바 (LNB) -->
+    <div class="sidebar">
+      <div class="sidebar-menu">
+        <div class="logo">
+          <img src="images/ic_logo.png" alt="Suprema Logo">
+        </div>
+        <a href="sub_01.html" class="menu-item">
+          <img src="images/ic_home_24.png" class="menu-icon">
+          <span>홈</span>
+        </a>
+        <a href="sub_02.html" class="menu-item">
+          <img src="images/ic_noti_24.png" class="menu-icon">
+          <span>입찰 공고 관리</span>
+        </a>
+        <a href="sub_03.html" class="menu-item">
+          <img src="images/ic_evaluation_24.png" class="menu-icon">
+          <span>입찰 평가</span>
+        </a>
+        <a href="sub_04.html" class="menu-item">
+          <img src="images/ic_history_24.png" class="menu-icon">
+          <span>입찰 이력 관리</span>
+        </a>
+        <a href="sub_05.html" class="menu-item active">
+          <img src="images/ic_outsourcing_24.png" class="menu-icon">
+          <span>외주사 관리</span>
+        </a>
+      </div>
+
+      <!-- 하단 설정 버튼 -->
+      <div class="sidebar-footer">
+        <a href="settings.html" class="menu-item">
+          <img src="images/ic_setting_24.png" class="menu-icon" />
+          <span>설정</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+        <div class="header-wrapper">
+          <button class="menu-toggle">
+              <img src="images/ic_menu_mo_48.png" alt="메뉴 아이콘" class="menu-toggle-icon">
+          </button>
+          <div class="header-container">
+              <div class="header">
+                  <div class="header-title">외주사 관리</div> <!-- ✅ 좌측 텍스트 추가 -->
+                  <div class="header-icons">
+                      <button class="icon-btn" id="alarmContainer">
+                          <img src="images/ic_alarm_48.png" alt="알림 아이콘" class="alarm-icon" width="48" height="48">
+                          <span class="alarm-badge" id="alarmBadge">3</span>
+                      </button>
+                      <button class="icon-btn" id="userInfo">
+                          <img src="images/ic_my_48.png" alt="마이페이지" class="user-icon">
+                      </button>
+                      <button class="icon-btn open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="로그아웃하시겠습니까?" data-popup-title="확인">
+                          <img src="images/ic_logout_48.png" alt="로그아웃" class="logout-icon">
+                      </button>
+                  </div>
+            </div>
+           </div>
+         </div>
+        <!-- 헤더 -->
+
+        <!-- 콘텐츠 헤더 -->
+        <div class="content-header">
+          <!-- 좌측 필터 그룹 -->
+          <div class="filter-group-left">
+            <input type="text" class="header-input" placeholder="공고명을 입력하세요">
+          </div>
+        
+          <!-- 우측 필터 그룹 -->
+          <div class="filter-group-right">
+            <div class="dropdown-wrap">
+              <div class="header-dropdown">
+                <button class="dropdown-button" id="projectDropdown">프로젝트명</button>
+                <div class="dropdown-menu">
+                  <div class="dropdown-item">본사 리모델링 프로젝트</div>
+                  <div class="dropdown-item">신사옥 건설 프로젝트</div>
+                  <div class="dropdown-item">주차장 확장 프로젝트</div>
+                  <div class="dropdown-item">전산실 확장 프로젝트</div>
+                  <div class="dropdown-item">구내식당 리모델링 프로젝트</div>
+                </div>
+              </div>
+            </div>
+            <div class="header-dropdown">
+              <button class="dropdown-button" id="managerDropdown">
+                <span class="selected-value">담당자</span>
+              </button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">홍길동</div>
+                <div class="dropdown-item">김철수</div>
+                <div class="dropdown-item">이영희</div>
+                <div class="dropdown-item">박지민</div>
+                <div class="dropdown-item">최준호</div>
+              </div>
+            </div>
+            <div class="header-dropdown">
+              <button class="dropdown-button" id="statusDropdown">
+                <span class="selected-value">상태</span>
+              </button>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">진행중</div>
+                <div class="dropdown-item">마감임박</div>
+                <div class="dropdown-item">마감</div>
+                <div class="dropdown-item">평가중</div>
+              </div>
+            </div>
+        
+            <div class="date-picker">날짜</div>
+            <button class="search-button">검색</button>
+          </div>
+        </div>
+      
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <!-- 왼쪽 -->
+          <div class="table-select-button">
+            10개씩 보기
+            <div class="table-select-dropdown">
+              <div class="table-select-option selected">10개씩 보기</div>
+              <div class="table-select-option">20개씩 보기</div>
+              <div class="table-select-option">50개씩 보기</div>
+              <div class="table-select-option">100개씩 보기</div>
+            </div>
+          </div>
+          <!--오른쪽-->
+          <div style="display: flex; gap: 8px;">
+          <button class="btn btn-solid btn-small open-upload-popup-btn" id="openUploadPopupBtn" data-popup-title="파일 업로드">엑셀 업로드</button>
+          <button class="btn btn-solid btn-small" id="openPopupBtn" data-popup-title="신규 등록">외주사 등록</button>
+          </div>
+        </div>
+        <p style="padding: 4px;"></p>
+        
+        <div class="table-section">
+            <div class="table-content">
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>회사명</th>
+                                <th>담당자</th>
+                                <th>연락처</th>
+                                <th>이메일(아이디)</th>
+                                <th>사업자 등록번호</th>
+                                <th>등록일</th>
+                                <th>상태</th>
+                                <th>관리</th>
+                                <th>인증</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-row" data-href="#bi2">
+                                <td>1</td>
+                                <td>대한건설</td>
+                                <td>김철수</td>
+                                <td>010-1234-5678</td>
+                                <td>kim@daehan.co.kr</td>
+                                <td>123-45-67890</td>
+                                <td>2024-04-10</td>
+                                <td class="chip-cell"><div class="tag-chip tag-orange">미가입</div></td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                    <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                    <span>수정</span>
+                                    </button>
+                                    <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                        <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                        <span>삭제</span>
+                                      </div>
+                                  </td>
+                                  <td class="chip-cell">
+                                    <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                      <img src="images/ic_certification_20.png" alt="인증 아이콘">
+                                      <span>인증</span>
+                                      </button>
+                                  </td>
+                            </tr>
+                            <tr class="table-row" data-href="#bi2">
+                              <td>2</td>
+                              <td>한국건축</td>
+                              <td>이영희</td>
+                              <td>010-2345-6789</td>
+                              <td>lee@hankook.co.kr</td>
+                              <td>234-56-78901</td>
+                              <td>2024-04-08</td>
+                              <td class="chip-cell"><div class="tag-chip tag-orange">미가입</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="table-row" data-href="#bi2">
+                              <td>3</td>
+                              <td>태평양건설</td>
+                              <td>박지민</td>
+                              <td>010-3456-7890</td>
+                              <td>park@pacific.co.kr</td>
+                              <td>345-67-89012</td>
+                              <td>2024-04-05</td>
+                              <td class="chip-cell"><div class="tag-chip tag-orange">미가입</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="table-row" data-href="#bi2">
+                              <td>4</td>
+                              <td>동양건설</td>
+                              <td>최준호</td>
+                              <td>010-4567-8901</td>
+                              <td>choi@dongyang.co.kr</td>
+                              <td>456-78-90123</td>
+                              <td>2024-04-03</td>
+                              <td class="chip-cell"><div class="tag-chip tag-green">활성</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" disabled data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘" style="opacity: 0.5;">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                             </tr>
+                             <tr class="table-row" data-href="#bi2">
+                              <td>5</td>
+                              <td>현대건설</td>
+                              <td>정민수</td>
+                              <td>010-5678-9012</td>
+                              <td>jung@hyundai.co.kr</td>
+                              <td>567-89-01234</td>
+                              <td>2024-04-01</td>
+                              <td class="chip-cell"><div class="tag-chip tag-green">활성</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" disabled data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘" style="opacity: 0.5;">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                             </tr>
+                             <tr class="table-row" data-href="#bi2">
+                              <td>6</td>
+                              <td>삼성건설</td>
+                              <td>강지영</td>
+                              <td>010-6789-0123</td>
+                              <td>kang@samsung.co.kr</td>
+                              <td>678-90-12345</td>
+                              <td>2024-03-30</td>
+                              <td class="chip-cell"><div class="tag-chip tag-green">활성</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" disabled data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘" style="opacity: 0.5;">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                             </tr>
+                             <tr class="table-row" data-href="#bi2">
+                              <td>7</td>
+                              <td>롯데건설</td>
+                              <td>윤태호</td>
+                              <td>010-7890-1234</td>
+                              <td>yoon@lotte.co.kr</td>
+                              <td>789-01-23456</td>
+                              <td>2024-03-28</td>
+                              <td class="chip-cell"><div class="tag-chip tag-green">활성</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" disabled data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘" style="opacity: 0.5;">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                             </tr>
+                             <tr class="table-row" data-href="#bi2">
+                              <td>8</td>
+                              <td>GS건설</td>
+                              <td>서현우</td>
+                              <td>010-8901-2345</td>
+                              <td>seo@gs.co.kr</td>
+                              <td>890-12-34567</td>
+                              <td>2024-03-25</td>
+                              <td class="chip-cell"><div class="tag-chip tag-red">비활성</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" disabled data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘" style="opacity: 0.5;">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                             </tr>
+                             <tr class="table-row" data-href="#bi2">
+                              <td>9</td>
+                              <td>포스코건설</td>
+                              <td>조은비</td>
+                              <td>010-9012-3456</td>
+                              <td>cho@posco.co.kr</td>
+                              <td>901-23-45678</td>
+                              <td>2024-03-22</td>
+                              <td class="chip-cell"><div class="tag-chip tag-red">비활성</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" disabled data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘" style="opacity: 0.5;">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                             </tr>
+                             <tr class="table-row" data-href="#bi2">
+                              <td>10</td>
+                              <td>대우건설</td>
+                              <td>홍길동</td>
+                              <td>010-0123-4567</td>
+                              <td>hong@daewoo.co.kr</td>
+                              <td>012-34-56789</td>
+                              <td>2024-03-20</td>
+                              <td class="chip-cell"><div class="tag-chip tag-red">비활성</div></td>
+                              <td class="chip-cell">
+                                <button class="icon-text-button open-popup-btn" data-popup-target="createPopup" id="userInfo">
+                                  <img src="images/ic_edit_20.png" alt="수정 아이콘">
+                                  <span>수정</span>
+                                  </button>
+                                  <button class="icon-text-button open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="공고를 삭제 하시겠습니까?" data-popup-title="삭제 확인">
+                                      <img src="images/ic_delete_20.png" alt="삭제 아이콘">
+                                      <span>삭제</span>
+                                    </div>
+                                </td>
+                                <td class="chip-cell">
+                                  <button class="icon-text-button open-popup-btn" disabled data-popup-target="confirmDeletePopup" data-popup-message="인증을 하시겠습니까?" data-popup-title="확인">
+                                    <img src="images/ic_certification_20.png" alt="인증 아이콘" style="opacity: 0.5;">
+                                    <span>인증</span>
+                                    </button>
+                                </td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 팝업 배경 딘 -->
+    <div id="popupDim" class="popup-dim" style="display: none;"></div>
+
+    <!-- 마이페이지 팝업 -->
+    <div id="mypagePopup" class="popup-container" style="display: none;">
+        <div class="popup-header">
+            <h2>마이페이지</h2>
+            <button class="close-btn" id="closePopupBtn">
+               <!-- <img src="images/ic_close.png" alt="닫기"> -->
+            </button>
+        </div>
+        <div class="popup-content">
+            <!-- 탭 메뉴 -->
+            <div class="tab-container">
+                <div class="tab-group">
+                    <button class="tab-button active" data-tab="tab1">개인정보</button>
+                    <button class="tab-button" data-tab="tab2">비밀번호 변경</button>
+                    <button class="tab-button" data-tab="tab3">회사 정보</button>
+                </div>
+            </div>
+
+            <!-- 탭 콘텐츠 -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    <div class="form-container">
+                        <div class="input-group field-container disabled">
+                            <label for="popup_name" class="field-label">이름</label>
+                            <input type="text" id="popup_name" class="text-field disabled" value="홍길동" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_department" class="field-label">담당자명</label>
+                            <input type="text" id="popup_department" class="text-field disabled" value="홍길동" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_email" class="field-label">이메일</label>
+                            <input type="email" id="popup_email" class="text-field disabled" value="suprema@suprema.co.kr" disabled>
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_phone" class="field-label">연락처</label>
+                            <input type="tel" id="popup_phone" class="text-field phone-field activated" value="010-1234-5678" />
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab2">
+                    <div class="form-container">
+                        <div class="input-group field-container">
+                            <label for="popup_current_pw" class="field-label">현재 비밀번호</label>
+                            <input type="password" id="popup_current_pw" class="text-field" placeholder="현재 비밀번호를 입력하세요">
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_new_pw" class="field-label">신규 비밀번호</label>
+                            <input type="password" id="popup_new_pw" class="text-field" placeholder="신규 비밀번호를 입력하세요">
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_confirm_pw" class="field-label">신규 비밀번호 확인</label>
+                            <input type="password" id="popup_confirm_pw" class="text-field" placeholder="신규 비밀번호를 다시 입력하세요">
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="tab3">
+                    <div class="form-container">
+                        <div class="input-group field-container disabled">
+                            <label for="popup_company" class="field-label">회사명</label>
+                            <input type="text" id="popup_company" class="text-field disabled" value="슈프리마" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_business_no" class="field-label">사업자 등록번호</label>
+                            <input type="text" id="popup_business_no" class="text-field disabled" value="123-12324-12345" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_ceo" class="field-label">대표자명</label>
+                            <input type="text" id="popup_ceo" class="text-field disabled" value="홍길동" disabled>
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_company_phone" class="field-label">연락처</label>
+                            <input type="tel" id="popup_company_phone" class="text-field phone-field activated" value="010-1234-5678" />
+                        </div>
+                    </div>
+                </div>
+                  <div class="button-container" style="justify-content: flex-end; padding: 0 40px 0 0;">
+                  <button class="btn btn-line close-btn">취소</button>
+                  <button class="btn btn-solid">등록</button>
+                  </div>
+            </div>
+        </div>
+        <!--<button class="close-btn">닫기</button>-->
+    </div>
+
+   <!--업로드 팝업-->
+    <div class="popup-container" id="uploadPopup" style="display: none; max-width: 300px;">
+      <div class="popup-header">
+        <h2>파일 업로드</h2>
+      </div>
+      <div class="popup-content">
+        <div class="form-container">
+          <!-- 안내 문구 -->
+          <div style="margin-bottom: 20px; text-align: center;">
+            <p>외주사 정보를 엑셀 파일로 일괄 등록할 수 있습니다.</p>
+            <p>아래 양식을 다운로드하여 작성 후 업로드 해주세요.</p>
+          </div>
+
+          <!-- 파일 다운로드 버튼 -->
+          <div style="text-align: center; margin-bottom: 20px;">
+            <button class="icon-text-button">
+              <img src="images/ic_download_20.png" alt="다운로드 아이콘">
+              <span>양식 다운로드</span>
+            </button>
+          </div>
+
+          <!-- 파일 첨부 버튼 -->
+          <div style="margin-bottom: 20px;">
+            <label class="field-label required" for="uploadFileInput">파일 등록</label>
+
+            <!-- 전체 영역이 버튼처럼 보이는 라벨 -->
+            <label for="uploadFileInput" class="file-upload-full-button">
+              <img src="./images/ic_upload_24.png" alt="파일 아이콘" class="file-upload-icon" />
+              <span>파일을 등록해 주세요</span>
+            </label>
+
+            <input type="file" id="uploadFileInput" style="display: none;">
+
+            <!-- 업로드된 파일 리스트 -->
+            <div class="uploaded-file-list"></div>
+          </div>
+
+          <!-- 하단 버튼 -->
+          <div class="button-container" style="justify-content: flex-end;">
+            <button class="btn btn-line close-btn">취소</button>
+            <button class="btn btn-solid">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--신규팝업-->
+    <div class="popup-container" id="createPopup">
+      <div class="popup-header">
+      <h2>신규 등록</h2>
+      <button class="close-btn" id="closeCreatePopupBtn">
+        <!--<img src="images/ic_close.png" alt="닫기">-->
+      </button>
+      </div>
+      <div class="popup-content">
+      <div class="form-container">
+        <div class="input-row">
+            <div class="input-col">
+              <label class="field-label required" for="dropdownManager2">프로젝트명</label>
+              <div class="dropdown-container">
+                <div class="dropdown-select" id="dropdownManager2">
+                  <span class="selected-value">프로젝트명을 선택해주세요</span>
+                  <span class="dropdown-icon"></span>
+                </div>
+                <div class="dropdown-options">
+                  <div class="dropdown-option">프로젝트명1</div>
+                  <div class="dropdown-option">프로젝트명2</div>
+                  <div class="dropdown-option">프로젝트명3</div>
+                </div>
+              </div>
+            </div>
+            <div class="input-col">
+              <label class="field-label required" for="dropdownManager2">입찰 조건</label>
+              <div class="dropdown-container">
+                <div class="dropdown-select" id="dropdownManager2">
+                  <span class="selected-value">입찰조건을 선택해주세요</span>
+                  <span class="dropdown-icon"></span>
+                </div>
+                <div class="dropdown-options">
+                  <div class="dropdown-option">입찰조건1</div>
+                  <div class="dropdown-option">입찰조건2</div>
+                  <div class="dropdown-option">입찰조건3</div>
+                </div>
+              </div>
+            </div>
+        </div>          
+        <div class="input-row">
+            <div class="input-col">
+              <label class="field-label required" for="titleInput">공고명</label>
+              <input type="text" id="announcementTitle" class="text-field" placeholder="공고명을 입력하세요">
+            </div>
+            <div class="input-col">
+                <label class="field-label required" for="dropdownManager2">입찰 방식</label>
+                <div class="dropdown-container">
+                  <div class="dropdown-select" id="dropdownManager2">
+                    <span class="selected-value">입찰방식 선택해주세요</span>
+                    <span class="dropdown-icon"></span>
+                  </div>
+                  <div class="dropdown-options">
+                    <div class="dropdown-option">입찰방식1</div>
+                    <div class="dropdown-option">입찰방식2</div>
+                    <div class="dropdown-option">입찰방식3</div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        <div class="input-row">
+            <div class="input-col">
+              <label class="field-label required" for="titleInput">공고내용</label>
+              <input type="text" id="announcementContent" class="text-field" placeholder="공고내용을 입력하세요">
+            </div>
+            <div class="input-col">
+                <label class="field-label required" for="dropdownManager2">외주사</label>
+                <div class="dropdown-container">
+                  <div class="dropdown-select" id="dropdownManager2">
+                    <span class="selected-value">외주사를 선택해주세요</span>
+                    <span class="dropdown-icon"></span>
+                  </div>
+                  <div class="dropdown-options">
+                    <div class="dropdown-option">외주사1</div>
+                    <div class="dropdown-option">외주사2</div>
+                    <div class="dropdown-option">외주사3</div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <div class="input-row">
+            <div class="input-col narrow">
+              <label class="field-label required" for="startDate">시작일</label>
+              <div class="date-input-wrap">
+                <input type="text" id="startDate" class="date-input" placeholder="시작일 선택" readonly>
+                <img src="images/ic_calender_24.png" alt="달력 아이콘" class="calendar-icon">
+              </div>
+            </div>
+            <div class="input-col narrow">
+              <label class="field-label required" for="endDate">종료일</label>
+              <div class="date-input-wrap">
+                <input type="text" id="endDate" class="date-input" placeholder="종료일 선택" readonly>
+                <img src="images/ic_calender_24.png" alt="달력 아이콘" class="calendar-icon">
+              </div>
+            </div>
+            <div class="input-col">
+              <label class="field-label required" for="fileInput">파일 등록</label>
+            
+              <!-- 전체 영역이 버튼처럼 보이는 라벨 -->
+              <label for="fileInput" class="file-upload-full-button">
+                <img src="./images/ic_upload_24.png" alt="파일 아이콘" class="file-upload-icon" />
+                <span>파일을 등록해 주세요</span>
+              </label>
+            
+              <input type="file" id="fileInput" style="display: none;">
+            
+              <!-- 업로드된 파일 리스트 -->
+              <div class="uploaded-file-list"></div>
+            </div>            
+        </div>
+        <div class="button-container" style="justify-content: flex-end;">
+          <button class="btn btn-line close-btn">취소</button>
+          <button class="btn btn-solid">완료</button>
+        </div>
+     </div>
+     </div>
+    </div>
+
+    <!-- 알림 팝업 (테이블 Chip 팝업) -->
+    <div class="popup-container" id="alarmPopup">
+        <div class="popup-header">
+            <h2>알림 목록</h2>
+            <button class="close-btn" id="closeAlarmBtn">
+                <img src="images/ic_close.png" alt="닫기">
+            </button>
+        </div>
+        <div class="popup-content">
+            <!-- 팝업 내 테이블 -->
+            <div class="table-section">
+                <div class="table-content">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>내용</th>
+                                    <th>시간</th>
+                                    <th>상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row">
+                                    <td>[입찰 결과] A프로젝트 입찰 결과가 발표되었습니다.</td>
+                                    <td>2023-04-15 10:45</td>
+                                    <td class="chip-cell"><div class="chip chip-grey">확인</div></td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>[입찰 결과] A프로젝트 입찰 결과가 발표되었습니다.</td>
+                                    <td>2023-04-15 10:45</td>
+                                    <td class="chip-cell"><div class="chip chip-green">미확인</div></td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td>[입찰 결과] A프로젝트 입찰 결과가 발표되었습니다.</td>
+                                    <td>22023-04-15 10:45</td>
+                                    <td class="chip-cell"><div class="chip chip-grey">확인</div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 알럿 팝업 -->
+    <div class="popup-container" id="confirmDeletePopup" style="display:none">
+      <div class="popup-header">
+        <h2>확인</h2>
+      </div>
+      <div class="popup-content centered">
+        <p>선택하신 프로젝트 목록을<br>삭제하시겠습니까?</p>
+      </div>
+      <div class="button-row centered">
+        <button class="btn btn-line close-btn">취소</button>
+        <button class="btn btn-solid confirm-delete-btn">확인</button>
+      </div>
+    </div>
+
+    <script src="./js/main.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // 날짜 선택 이벤트 리스너
+            document.addEventListener('date-change', function(e) {
+                console.log('선택된 날짜:', e.detail.value);
+            });
+
+            // 알림 아이콘 클릭 이벤트
+            document.getElementById('alarmContainer').onclick = function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                document.getElementById('popupDim').style.display = 'block';
+                document.getElementById('alarmPopup').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                return false;
+            };
+
+            // 알림 팝업 닫기 버튼
+            document.getElementById('closeAlarmBtn').onclick = function() {
+                document.getElementById('popupDim').style.display = 'none';
+                document.getElementById('alarmPopup').style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            // 딤 영역 클릭 이벤트
+            document.getElementById('popupDim').onclick = function() {
+                this.style.display = 'none';
+                document.getElementById('mypagePopup').style.display = 'none';
+                document.getElementById('alarmPopup').style.display = 'none';
+                document.getElementById('confirmDeletePopup').style.display = 'none';
+                document.getElementById('createPopup').style.display = 'none';
+                document.getElementById('uploadPopup').style.display = 'none';
+                document.body.style.overflow = '';
+            };
+
+            // 검색 이벤트 리스너
+            document.addEventListener('content-search', function(e) {
+                console.log('검색 파라미터:', e.detail);
+                alert('검색 파라미터: ' + JSON.stringify(e.detail));
+            });
+
+            // 페이지네이션 기능
+            const paginationItems = document.querySelectorAll('.pagination-item');
+            paginationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    document.querySelector('.pagination-item.active')?.classList.remove('active');
+                    this.classList.add('active');
+                    console.log('페이지 변경:', this.textContent);
+                });
+            });
+
+            // 화살표 버튼 기능
+            const paginationArrows = document.querySelectorAll('.pagination-arrow');
+            paginationArrows.forEach(arrow => {
+                arrow.addEventListener('click', function() {
+                    const currentPage = parseInt(document.querySelector('.pagination-item.active').textContent);
+                    let newPage;
+                    if (this.textContent === '❮') {
+                        newPage = Math.max(1, currentPage - 1);
+                    } else {
+                        newPage = Math.min(888, currentPage + 1);
+                    }
+                    const newPageItem = Array.from(paginationItems).find(item => parseInt(item.textContent) === newPage);
+                    if (newPageItem) {
+                        newPageItem.click();
+                    }
+                });
+            });
+
+            // 신규 등록 팝업 열기
+            document.getElementById('openPopupBtn').addEventListener('click', function () {
+                document.getElementById('popupDim').style.display = 'block';
+                document.getElementById('createPopup').style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+
+            // 신규 등록 팝업 닫기
+            document.getElementById('closeCreatePopupBtn').addEventListener('click', function () {
+                document.getElementById('popupDim').style.display = 'none';
+                document.getElementById('createPopup').style.display = 'none';
+                document.body.style.overflow = '';
+            });
+
+            // 업로드 팝업 열기 (예시 - 실제 버튼 ID로 변경 필요)
+            // 실제 사용 시 적절한 버튼에 이벤트 리스너 추가 필요
+            document.querySelectorAll('.open-upload-popup-btn').forEach(function(btn) {
+                btn.addEventListener('click', function () {
+                    document.getElementById('popupDim').style.display = 'block';
+                    document.getElementById('uploadPopup').style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            // 업로드 팝업 닫기
+            document.querySelectorAll('#uploadPopup .close-btn').forEach(function(btn) {
+                btn.addEventListener('click', function () {
+                    document.getElementById('popupDim').style.display = 'none';
+                    document.getElementById('uploadPopup').style.display = 'none';
+                    document.body.style.overflow = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

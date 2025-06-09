@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko" style="margin: 0; padding: 0;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슈프리마 공사입찰시스템</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- JavaScript 파일은 스크립트 태그로 로드해야 합니다 -->
+</head>
+<body>
+    <!-- 모바일 메뉴 토글 버튼 -->
+    <button class="menu-toggle">
+        <img src="images/ic_menu_mo_48.png" alt="메뉴 아이콘" class="menu-toggle-icon">
+    </button>
+
+    <!-- 모바일용 햄버거 아이콘은 JavaScript에서 동적으로 생성됩니다 -->
+
+    <!-- 사이드바 (LNB) -->
+    <div class="sidebar">
+      <div class="sidebar-menu">
+        <div class="logo">
+          <img src="images/ic_logo.png" alt="Suprema Logo">
+        </div>
+        <a href="sub_01.html" class="menu-item active">
+          <img src="images/ic_home_24.png" class="menu-icon">
+          <span>홈</span>
+        </a>
+        <a href="sub_02.html" class="menu-item">
+          <img src="images/ic_noti_24.png" class="menu-icon">
+          <span>입찰 공고 관리</span>
+        </a>
+        <a href="sub_03.html" class="menu-item">
+          <img src="images/ic_evaluation_24.png" class="menu-icon">
+          <span>입찰 평가</span>
+        </a>
+        <a href="sub_04.html" class="menu-item">
+          <img src="images/ic_history_24.png" class="menu-icon">
+          <span>입찰 이력 관리</span>
+        </a>
+        <a href="sub_05.html" class="menu-item">
+          <img src="images/ic_outsourcing_24.png" class="menu-icon">
+          <span>외주사 관리</span>
+        </a>
+      </div>
+    
+      <!-- 하단 설정 버튼 -->
+      <div class="sidebar-footer">
+        <a href="settings.html" class="menu-item">
+          <img src="images/ic_setting_24.png" class="menu-icon" />
+          <span>설정</span>
+        </a>
+      </div>
+    </div>    
+
+
+    <!-- 메인 콘텐츠 -->
+    <div class="main-content">
+        <!-- 헤더 -->
+        <div class="header-wrapper">
+            <button class="menu-toggle">
+                <img src="images/ic_menu_mo_48.png" alt="메뉴 아이콘" class="menu-toggle-icon">
+            </button>
+            <div class="header-container">
+                <div class="header">
+                    <div class="header-title">홈</div> <!-- ✅ 좌측 텍스트 추가 -->
+                    <div class="header-icons">
+                        <button class="icon-btn" id="alarmContainer">
+                            <img src="images/ic_alarm_48.png" alt="알림 아이콘" class="alarm-icon" width="48" height="48">
+                            <span class="alarm-badge" id="alarmBadge">3</span>
+                        </button>
+                        <button class="icon-btn" id="userInfo">
+                            <img src="images/ic_my_48.png" alt="마이페이지" class="user-icon">
+                        </button>
+                        <button class="icon-btn open-popup-btn" data-popup-target="confirmDeletePopup" data-popup-message="로그아웃하시겠습니까?" data-popup-title="확인">
+                            <img src="images/ic_logout_48.png" alt="로그아웃" class="logout-icon">
+                        </button>
+                    </div>
+              </div>
+             </div>
+        </div>
+          <!-- 헤더 -->
+
+        <!-- 카드 섹션 -->
+        <div class="card-section">
+            <button class="card" onclick="location.href='#projects'">
+                <img src="images/ic_home_card01_80.png" alt="프로젝트 아이콘" class="card-icon-img">
+                <div class="card-content">
+                    <div class="card-title">진행 중인 프로젝트</div>
+                    <div class="card-count">3건</div>
+                </div>
+            </button>
+
+            <button class="card" onclick="location.href='#bids'">
+                <img src="images/ic_home_card02_80.png" alt="입찰 공고 아이콘" class="card-icon-img">
+                <div class="card-content">
+                    <div class="card-title">입찰 진행 중인 공고</div>
+                    <div class="card-count">3건</div>
+                </div>
+            </button>
+
+            <button class="card" onclick="location.href='#evaluations'">
+                <img src="images/ic_home_card03_80.png" alt="평가 아이콘" class="card-icon-img">
+                <div class="card-content">
+                    <div class="card-title">평가 대기 중 입찰 건</div>
+                    <div class="card-count">3건</div>
+                </div>
+            </button>
+        </div>
+
+        <!-- 테이블 섹션 -->
+        <div class="table-section">
+            <div class="table-header">
+                <div class="table-title">최근 입찰 이력 5개</div>
+                <div class="view-more">
+                    더보기 <img src="images/ic_more_24.png" alt="화살표 아이콘" class="arrow-icon">
+                </div>
+            </div>
+
+            <div class="table-content">
+                <div class="table-responsive">
+                    <table>
+                    <thead>
+                        <tr>
+                            <th>공고명</th>
+                            <th>프로젝트명</th>
+                            <th>상태</th>
+                            <th>등록일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-row" onclick="location.href='#bid1'">
+                            <td>본사 리모델링 공사 입찰 공고</td>
+                            <td>본사 리모델링 프로젝트</td>
+                            <td>입찰중</td>
+                            <td>2024-04-05</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid2'">
+                            <td>사무실 인테리어 공사 공고</td>
+                            <td>사무실 인테리어 프로젝트</td>
+                            <td>평가중</td>
+                            <td>2024-04-03</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid3'">
+                            <td>주차장 확장 공사 입찰</td>
+                            <td>주차장 확장 프로젝트</td>
+                            <td>완료</td>
+                            <td>2024-04-01</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid4'">
+                            <td>외벽 도색 공사 공고</td>
+                            <td>외벽 도색 프로젝트</td>
+                            <td>입찰중</td>
+                            <td>2024-03-28</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid5'">
+                            <td>화장실 개보수 공사</td>
+                            <td>화장실 개보수 프로젝트</td>
+                            <td>입찰중</td>
+                            <td>2024-03-25</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid6'">
+                            <td>옥상 방수 공사 입찰</td>
+                            <td>옥상 방수 프로젝트</td>
+                            <td>평가중</td>
+                            <td>2024-03-22</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid7'">
+                            <td>엘리베이터 교체 공사</td>
+                            <td>엘리베이터 교체 프로젝트</td>
+                            <td>완료</td>
+                            <td>2024-03-20</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid8'">
+                            <td>보안시설 설치 공사</td>
+                            <td>보안시설 설치 프로젝트</td>
+                            <td>입찰중</td>
+                            <td>2024-03-18</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid9'">
+                            <td>조경 정비 공사 공고</td>
+                            <td>조경 정비 프로젝트</td>
+                            <td>평가중</td>
+                            <td>2024-03-15</td>
+                        </tr>
+                        <tr class="table-row" onclick="location.href='#bid10'">
+                            <td>냉난방 시설 교체 공사</td>
+                            <td>냉난방 시설 교체 프로젝트</td>
+                            <td>완료</td>
+                            <td>2024-03-12</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 팝업 배경 딘 -->
+    <div class="popup-dim" id="popupDim"></div>
+
+    <!-- 마이페이지 팝업 -->
+    <div class="popup-container" id="mypagePopup">
+        <div class="popup-header">
+            <h2>마이페이지</h2>
+            <button class="close-btn" id="closePopupBtn">
+                <img src="images/ic_close.png" alt="닫기">
+            </button>
+        </div>
+
+        <div class="popup-content">
+            <!-- 탭 메뉴 -->
+            <div class="tab-container">
+                <div class="tab-group">
+                    <button class="tab-button active" data-tab="tab1">개인정보</button>
+                    <button class="tab-button" data-tab="tab2">비밀번호 변경</button>
+                    <button class="tab-button" data-tab="tab3">회사 정보</button>
+                </div>
+            </div>
+
+            <!-- 탭 콘텐츠 -->
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab1">
+                    <div class="form-container">
+                        <div class="input-group field-container disabled">
+                            <label for="popup_name" class="field-label">이름</label>
+                            <input type="text" id="popup_name" class="text-field disabled" value="홍길동" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_department" class="field-label">담당자명</label>
+                            <input type="text" id="popup_department" class="text-field disabled" value="홍길동" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_email" class="field-label">이메일</label>
+                            <input type="email" id="popup_email" class="text-field disabled" value="suprema@suprema.co.kr" disabled>
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_phone" class="field-label">연락처</label>
+                            <input type="tel" id="popup_phone" class="text-field phone-field activated" value="010-1234-5678" />
+                        </div>
+
+                        <div class="button-container" style="justify-content: flex-end;">
+                            <button type="button" class="btn btn-solid" id="saveBtn">저장</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="tab2">
+                    <div class="form-container">
+                        <div class="input-group field-container">
+                            <label for="popup_current_pw" class="field-label">현재 비밀번호</label>
+                            <input type="password" id="popup_current_pw" class="text-field" placeholder="현재 비밀번호를 입력하세요">
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_new_pw" class="field-label">신규 비밀번호</label>
+                            <input type="password" id="popup_new_pw" class="text-field" placeholder="신규 비밀번호를 입력하세요">
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_confirm_pw" class="field-label">신규 비밀번호 확인</label>
+                            <input type="password" id="popup_confirm_pw" class="text-field" placeholder="신규 비밀번호를 다시 입력하세요">
+                        </div>
+
+                        <div class="button-container" style="justify-content: flex-end;">
+                            <button type="button" class="btn btn-solid" id="saveBtn2">저장</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="tab3">
+                    <div class="form-container">
+                        <div class="input-group field-container disabled">
+                            <label for="popup_company" class="field-label">회사명</label>
+                            <input type="text" id="popup_company" class="text-field disabled" value="슈프리마" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_business_no" class="field-label">사업자 등록번호</label>
+                            <input type="text" id="popup_business_no" class="text-field disabled" value="123-12324-12345" disabled>
+                        </div>
+
+                        <div class="input-group field-container disabled">
+                            <label for="popup_ceo" class="field-label">대표자명</label>
+                            <input type="text" id="popup_ceo" class="text-field disabled" value="홍길동" disabled>
+                        </div>
+
+                        <div class="input-group field-container">
+                            <label for="popup_company_phone" class="field-label">연락처</label>
+                            <input type="tel" id="popup_phone" class="text-field phone-field activated" value="010-1234-5678" />
+                        </div>
+
+                        <div class="button-container" style="justify-content: flex-end;">
+                            <button type="button" class="btn btn-solid" id="saveBtn3">저장</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 알림 팝업 (테이블 Chip 팝업) -->
+    <div class="popup-container" id="alarmPopup">
+        <div class="popup-header">
+            <h2>알림 목록</h2>
+            <button class="close-btn" id="closeAlarmBtn">
+                <img src="images/ic_close.png" alt="닫기">
+            </button>
+        </div>
+        <div class="popup-content">
+            <!-- 팝업 내 테이블 -->
+            <div class="table-section">
+                <div class="table-content">
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <!--<th>공고명</th>
+                                    <th>내용</th>-->
+                                    <th>내용</th>
+                                    <th>시간</th>
+                                    <th>상태</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="table-row">
+                                    <!--<td>새공고</td>
+                                    <td>프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_</td>-->
+                                    <td>[입찰 결과] A프로젝트 입찰 결과가 발표되었습니다.</td>
+                                    <td>2023-04-15 10:45</td>
+                                    <td class="chip-cell"><div class="chip chip-grey">확인</div></td>
+                                </tr>
+                                <tr class="table-row">
+                                    <!--<td>새공고</td>
+                                    <td>프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_</td>-->
+                                    <td>[입찰 결과] A프로젝트 입찰 결과가 발표되었습니다.</td>
+                                    <td>2023-04-15 10:45</td>
+                                    <td class="chip-cell"><div class="chip chip-green">미확인</div></td>
+                                </tr>
+                                <tr class="table-row">
+                                   <!-- <td>새공고</td>
+                                    <td>프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_프로젝트명1_</td>-->
+                                    <td>[입찰 결과] A프로젝트 입찰 결과가 발표되었습니다.</td>
+                                    <td>22023-04-15 10:45</td>
+                                    <td class="chip-cell"><div class="chip chip-grey">확인</div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 팝업 내 버튼
+            <div class="form-container">
+                <div class="button-container" style="justify-content: flex-end;">
+                    <button type="button" class="btn btn-solid" id="confirmAlarmBtn">확인</button>
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+    <!-- 알럿 팝업 -->
+    <div class="popup-container" id="confirmDeletePopup" style="display:none">
+      <div class="popup-header">
+        <h2>확인</h2>
+      </div>
+      <div class="popup-content centered">
+        <p>로그아웃하시겠습니까?</p>
+      </div>
+      <div class="button-row centered">
+        <button class="btn btn-line close-btn">취소</button>
+        <button class="btn btn-solid confirm-delete-btn">확인</button>
+      </div>
+    </div>
+
+    <!-- 팝업 스타일은 style.css에 정의되어 있습니다 -->
+
+    <script src="./js/main.js"></script>
+    <!-- 마이페이지 팝업 관련 기능은 js/department_dashboard.js에 구현되어 있습니다 -->
+
+    <script>
+        // 인라인 스크립트로 직접 이벤트 핸들러 추가
+        document.getElementById('alarmContainer').onclick = function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            // 알림 팝업 표시
+            document.getElementById('popupDim').style.display = 'block';
+            document.getElementById('alarmPopup').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+
+            // 기본 동작 방지
+            return false;
+        };
+
+        // 알림 팝업 닫기 버튼
+        document.getElementById('closeAlarmBtn').onclick = function() {
+            document.getElementById('popupDim').style.display = 'none';
+            document.getElementById('alarmPopup').style.display = 'none';
+            document.body.style.overflow = ''; // 배경 스크롤 복원
+        };
+
+        // 알림 팝업 확인 버튼
+        document.getElementById('confirmAlarmBtn').onclick = function() {
+            document.getElementById('popupDim').style.display = 'none';
+            document.getElementById('alarmPopup').style.display = 'none';
+            document.body.style.overflow = ''; // 배경 스크롤 복원
+
+            // 알림 배지 숫자 0으로 변경
+            document.getElementById('alarmBadge').textContent = '0';
+        };
+
+        // 딤 영역 클릭 이벤트
+        document.getElementById('popupDim').onclick = function() {
+            this.style.display = 'none';
+            document.getElementById('mypagePopup').style.display = 'none';
+            document.getElementById('alarmPopup').style.display = 'none';
+            document.getElementById('confirmDeletePopup').style.display = 'none';
+            document.body.style.overflow = ''; // 배경 스크롤 복원
+        };
+    </script>
+</body>
+</html>
